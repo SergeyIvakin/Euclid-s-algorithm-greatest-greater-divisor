@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOD</title>
+    <style>
+        .container {
+            width: 600px;
+            margin: 30px auto;
+            background-color: rgb(226, 206, 180);
+            padding: 20px;
+        }
+        button {
+            width: 250px;
+            padding: 10px 20px;
+            background-color: darkgreen;
+            color: white;
+            font-size: 1em;
+            margin-top: 20px;
+            border-radius: 5px;
+            border: none;
+        }
+        #nodContent {
+            margin: 20px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+        input {
+            margin: 10px;
+            height: 30px;
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Рассчёт наибольшего общего делителя (НОД) между двумя числами по алгоритму Евклида (JavaScript)</h2>
+        <label for="number-1">Число 1</label>
+        <input type="text" id="number-1" placeholder="Введите число">
+        <label for="number-2">Число 2</label>
+        <input type="text" id="number-2" placeholder="Введите число"><br>
+        <button>Рассчитать НОД</button>
+        <div id="nodContent"></div>
+        <div><img src="https://shareslide.ru/img/thumbs/5a18a1ca2501e7a4efb6541bc97bcab7-800x.jpg" alt=""></div>
+    </div>
+    <script>
+        let number1 = document.querySelector('#number-1'),
+            number2 = document.querySelector('#number-2'),
+            calculateNod = document.querySelector('button'),
+            nodContent = document.querySelector('#nodContent');
+            
+        calculateNod.addEventListener('click', () => {
+
+            let maxNumber = Math.max(+number1.value, +number2.value),
+                minNumber = Math.min(+number1.value, +number2.value),
+                difference = maxNumber - minNumber,
+                differenceNull = number1.value - number2.value; 
+
+            if(differenceNull == 0) nodContent.innerHTML = number1.value;
+            
+            if(number1.value <= 0 || number2.value <= 0) {
+                alert('Введите числа больше ноля!');
+                return;
+            } 
+
+                while(difference > 0) {
+                    
+                    let max = Math.max(difference, minNumber);
+                    let min = Math.min(difference, minNumber)
+                    maxNumber = max;
+                    minNumber = min;
+                    difference = max - min;
+
+                    if(max == min) nodContent.innerHTML = 'НОД у этих двух чисел равен:' + ' ' + max;
+                }
+            });
+    </script>
+</body>
+</html>
